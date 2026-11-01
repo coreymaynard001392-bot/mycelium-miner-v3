@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "myceliumminer",
+  "version": "${version}",
+  "name": "Mycelium Miner",
+  "description": "A client-side waypoint recorder and mining-route helper for single-player worlds.",
+  "authors": ["ChatGPT"],
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.example.myceliumminer.MyceliumMinerClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
