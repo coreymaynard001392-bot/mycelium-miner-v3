@@ -150,11 +150,26 @@ public class MyceliumMinerClient implements ClientModInitializer {
         if (mc.options != null && ownedAttack) { restore(mc, mc.options.keyAttack); ownedAttack = false; }
     }
     private static void release(Minecraft mc) { releaseForwardAndJump(mc); releaseAttack(mc); }
+    
     private static void restore(Minecraft mc, KeyMapping key) {
-        // Re-synchronise from Minecraft's bound key, not hard-coded W/Space/mouse.
+        // Restore keyboard input when the macro stops.
         if (mc.getWindow() != null) {
-    key.setDown(InputConstants.isKeyDown(mc.getWindow(), key.saveString().startsWith("key.keyboard.") ? Integer.parseInt(key.saveString().substring("key.keyboard.".length())) : -1));
-}
-       
+            String binding = key.saveString();
+
+            if (binding.startsWith("key.keyboard.")) {
+                try {
+                    int keyCode = Integer.parseInt(
+                        binding.substring("key.keyboard.".length())
+                    );
+                    key.setDown(InputConstants.isKeyDown(
+                        mc.getWindow(), keyCode
+                    ));
+                } catch (NumberFormatException e) {
+                    key.setDown(false);
+                }
+            } else {
+                key.setDown(false);
+            }
+        }
     }
 }
