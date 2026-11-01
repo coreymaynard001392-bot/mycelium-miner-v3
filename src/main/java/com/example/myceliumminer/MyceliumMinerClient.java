@@ -152,8 +152,9 @@ public class MyceliumMinerClient implements ClientModInitializer {
     private static void release(Minecraft mc) { releaseForwardAndJump(mc); releaseAttack(mc); }
     private static void restore(Minecraft mc, KeyMapping key) {
         // Re-synchronise from Minecraft's bound key, not hard-coded W/Space/mouse.
-        if (mc.getWindow() != null && key.getKey().getType() == InputConstants.Type.KEYSYM) {
-            key.setDown(InputConstants.isKeyDown(mc.getWindow(), key.getKey().getValue()));
+        if (mc.getWindow() != null) {
+    key.setDown(InputConstants.isKeyDown(mc.getWindow(), key.saveString().startsWith("key.keyboard.") ? Integer.parseInt(key.saveString().substring("key.keyboard.".length())) : -1));
+}
         } else { key.setDown(false); }
     }
 }
