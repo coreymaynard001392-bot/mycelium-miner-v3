@@ -155,6 +155,6 @@ public class MyceliumMinerClient implements ClientModInitializer {
         if (mc.getWindow() != null) {
     key.setDown(InputConstants.isKeyDown(mc.getWindow(), key.saveString().startsWith("key.keyboard.") ? Integer.parseInt(key.saveString().substring("key.keyboard.".length())) : -1));
 }
-        } else { key.setDown(false); }
+       
     }
 }
